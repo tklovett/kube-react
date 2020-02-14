@@ -7,7 +7,7 @@ A purely hypothetical thought experiment
 ```js
 /* package core/v1 */
 
-// This doesn't actually exist as a core/v` resource today
+// This doesn't actually exist as a core/v1 resource today
 function ResourceSpec({memory, cpu}) {
   validate(memory);
   validate(cpu);
@@ -89,26 +89,27 @@ function BackendAPI(props) {
 }
 ```
 
-
 ```js
-function com.example.api(props) {
+function Backend(props) {
   return [
     <NginxIngress value={this.props.nginx}>,
-    <Memcached value={this.props.memcached}>
+    <Memcached value={this.props.memcached}>,
     <BackendAPI value={this.props.backendApi}>,
   ]
 }
 ```
 
-## KubeReact Render
+## Render Kubernetes manfiests Using `kube-react`
 
-```
+```sh
 kube-react render --config-switch production > manifests.yaml
+
+cat manifests.yaml | kubectl apply --filename -
 ```
 
-## Sync configuration in cluster using Terrakube 
+## Sync configuration to cluster using Terrakube
 
-```
+```sh
 terrakube plan --from-file manifest.yaml --to-plan planfile.txt
 terrakube apply --auto-approve --from-plan planfile.txt
 ```

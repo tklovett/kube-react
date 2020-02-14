@@ -1,0 +1,16 @@
+backendApi:
+  deployment:
+    spec:
+      replicas: 2
+      template:
+        spec:
+          containers:
+            - {}
+            - name: backend-app
+              resources:
+                requests:
+                  memory: 100M
+                limits: 
+                  memory: 100M
+
+          

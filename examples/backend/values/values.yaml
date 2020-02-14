@@ -1,0 +1,16 @@
+backendApi:
+  deployment:
+    spec:
+      replicas: 10
+      template:
+        spec:
+          containers:
+            - name: sidecar
+            - name: backend-app
+              resources:
+                requests:
+                  memory: 1G
+                  cpu: 500m
+                limits: 
+                  memory: 1G
+                  cpu: 1

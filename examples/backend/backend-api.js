@@ -1,5 +1,5 @@
-import { ConfigMap, Secret } from 'core.v1'
-import { Deployment, Service } from 'apps.v1'
+import { ConfigMap, Secret } from '../kubernetes/core/v1'
+import { Deployment, Service } from '../kubernetes/apps/v1'
 import ServiceMonitor from 'monitoring.coreos.com'
 
 function BackendAPI(props) {
@@ -10,4 +10,8 @@ function BackendAPI(props) {
     "configMap": <ConfigMap value={props.configMap} />,
     "secret": <Secret value={props.secret} />,
   }
+}
+
+export default {
+  BackendAPI
 }

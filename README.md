@@ -2,108 +2,26 @@
 
 A purely hypothetical thought experiment
 
-## Built-in Components Generated from Kuberentes Protobufs
+## Built-in Components Generated from Kubernetes Protobufs
 
-```js
-/* package core/v1 */
+* See [examples/kubernetes/core/v1](https://github.com/tklovett/kube-react/tree/master/examples/kubernetes/core/v1).
+* See [examples/kubernetes/apps/v1](https://github.com/tklovett/kube-react/tree/master/examples/kubernetes/apps/v1).
 
-// This doesn't actually exist as a core/v1 resource today
-function ResourceSpec({memory, cpu}) {
-  validate(memory);
-  validate(cpu);
-  return {
-    "memory": `${memory}`
-    "cpu": `${cpu}`
-  }
-}
+## End-user Usage
 
-function ResourceRequirements({requests, limits}) {
-  validate(request, limits);
-  return {
-    "resources": {
-      "requests": <ResourceSpec value={requests}>,
-      "limits": <ResourceSpec value={limits}>
-    }
-  }
-}
+* See [examples/backend](https://github.com/tklovett/kube-react/tree/master/examples/backend).
 
-function Container(props) {
-  return {
-    "name": `${props.name}`
-    "image": `${props.image}`
-    "resources": <v1.ResourceRequirements value={props.resources}>
-    // ...
-  }
-}
+## Tooling: "`kube-react`"
 
-function PodSpec(props) {
-  const containers = props.containers.forEach(container) => {
-    return <Container value={container}>
-    };
-  };
-  return {
-    "containers": {containers}
-    // ...
-  }
-}
-
-function PodTemplateSpec(props) {
-  return {
-    "metadata": <ObjectMeta>,
-    "spec": <PodSpec>
-  }
-}
-```
-
-```js
-/* package apps/v1 */
-
-function DeploymentSpec(props) {
-  return {
-    template: <PodTemplateSpec>
-    // ...
-  }
-}
-
-function Deployment(props) {
-  return {
-    "metadata": <ObjectMeta>,
-    "spec": <DeploymentSpec>
-    // ...
-  }
-}
-```
-
-## At the Application Level
-
-```js
-import { ConfigMap } from 'core.v1'
-import { Deployment, Service } from 'apps.v1'
-import ServiceMonitor from 'monitoring.coreos.com'
-
-function BackendAPI(props) {
-  <Deployment value={this.props.deployment}>
-  <Service value={this.props.service}>
-  <ServiceMonitor value={this.props.service}>
-  <ConfigMap>
-}
-```
-
-```js
-function Backend(props) {
-  return [
-    <NginxIngress value={this.props.nginx} />,
-    <Memcached value={this.props.memcached} />,
-    <BackendAPI value={this.props.backendApi} />,
-  ]
-}
-```
-
-## Render Kubernetes manfiests Using `kube-react`
+### Render Kubernetes manifests
 
 ```sh
-kube-react render --config-switch production > manifests.yaml
+kube-react render --file examples/backend/main.js --config-switch production > manifests.yaml
+```
 
+### Apply changes
+
+```sh
 cat manifests.yaml | kubectl apply --filename -
 ```
 

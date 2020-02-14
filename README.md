@@ -92,9 +92,9 @@ function BackendAPI(props) {
 ```js
 function Backend(props) {
   return [
-    <NginxIngress value={this.props.nginx}>,
-    <Memcached value={this.props.memcached}>,
-    <BackendAPI value={this.props.backendApi}>,
+    <NginxIngress value={this.props.nginx} />,
+    <Memcached value={this.props.memcached} />,
+    <BackendAPI value={this.props.backendApi} />,
   ]
 }
 ```
@@ -107,9 +107,27 @@ kube-react render --config-switch production > manifests.yaml
 cat manifests.yaml | kubectl apply --filename -
 ```
 
-## Sync configuration to cluster using Terrakube
+## A Tangent on "Terrakube"
+
+Wouldn't it be nice if Kubernetes had a full-featured state manager? Terraform has great workflow, semantics,
+and features – even if you think the Hashicorp Configuration Language leaves something to be desired.
+
+### Import Existing Resources into state management
 
 ```sh
-terrakube plan --from-file manifest.yaml --to-plan planfile.txt
-terrakube apply --auto-approve --from-plan planfile.txt
+terrakube import ${terrakube_id} ${external_id}
+```
+
+### Sync configuration to cluster using Terrakube
+
+```sh
+terrakube plan --from-file manifests.yaml --to-plan-file planfile.txt
+terrakube apply --auto-approve --from-plan-file planfile.txt
+```
+
+### Destroy resources selectively
+
+```sh
+terrakube taint ${terrakube_id}
+terrakube destroy ${terrakube_id}
 ```

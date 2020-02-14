@@ -1,0 +1,4 @@
+backendAPI:
+  deployment:
+    spec:
+      replicas: 5

@@ -1,11 +1,24 @@
 # kube-react
 
-A purely hypothetical thought experiment
+_A little thought experiment..._
+
+Web and UI developers spent many years writing templated "wrappers" around declarative object models. They generated full HTML using
+PHP, Handlebars, FlightJS, etc. Those smart folks experienced the limitations and pain points in using _templating_ to achieve reusability. 
+Some of those smart folks came up with a new model – ReactJS. In place of _templating_, ReactJS uses _composition_.
+
+We users of Helm may be finding ourselves in a similar world, using the Go Template Language to generate YAML. Maybe we can piggy
+back off the learnings of our colleagues, and leverage composition of components...
+
+Thoughts:
+
+* NodeJS is by no means a language du jour in the DevOps world
+* This is not ReactJS and isn't really trying to be. We're just trying to piggy back off of the good parts.
+* Having a package manager for deploying 3rd party systems is 💯👌. Thanks Helm.
 
 ## Built-in Components Generated from Kubernetes Protobufs
 
-* See [examples/kubernetes/core/v1](https://github.com/tklovett/kube-react/tree/master/examples/kubernetes/core/v1).
-* See [examples/kubernetes/apps/v1](https://github.com/tklovett/kube-react/tree/master/examples/kubernetes/apps/v1).
+* See [examples/kubernetes/core/v1](https://github.com/tklovett/kube-react/tree/master/examples/kubernetes/core/v1/index.js)
+* See [examples/kubernetes/apps/v1](https://github.com/tklovett/kube-react/tree/master/examples/kubernetes/apps/v1/index.js)
 
 ## End-user Usage
 
